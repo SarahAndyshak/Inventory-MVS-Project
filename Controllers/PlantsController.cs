@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Inventory.Controllers
 {
-  public class PlantsController : Controllers
+  public class PlantsController : Controller
   {
-    private readonly Inventory _db;
+    private readonly InventoryContext _db;
 
     public PlantsController(InventoryContext db)
     {
@@ -26,7 +26,7 @@ namespace Inventory.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.CollectionId = new SelectList(_db.Collections, "ColletionId", "Name");
+      ViewBag.CollectionId = new SelectList(_db.Collections, "CollectionId", "Name");
       return View();
     }
 
@@ -38,7 +38,7 @@ namespace Inventory.Controllers
         return RedirectToAction("Create");
       }
       _db.Plants.Add(plant);
-      __db.SaveChanges();
+      _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
@@ -61,7 +61,7 @@ namespace Inventory.Controllers
     public ActionResult Details(int id)
     {
       Plant thisPlant = _db.Plants
-                          .Include(plant = plant.Collection)
+                          .Include(plant => plant.Collection)
                           .FirstOrDefault(plant => plant.PlantId == id);
       return View(thisPlant);
     }
@@ -75,7 +75,7 @@ namespace Inventory.Controllers
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      Plant.thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == id);
+      Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == id);
       _db.Plants.Remove(thisPlant);
       _db.SaveChanges();
       return RedirectToAction("Index");

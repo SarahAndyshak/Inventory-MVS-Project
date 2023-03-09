@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Inventory.Models.Plant
+
+
+<h4>Add a new plant</h4>
+
+<p><strong>NOTE:</strong> You need to have at least one collection before you can add a plant!</p>
+<p>Go to @Html.ActionLink("this page", "Create", "Collections") to create a collection.</p>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Description)
+  @Html.TextBoxFor(model => model.Description)
+
+  @Html.LabelFor(model => model.Collection)
+  @Html.DropDownList("CollectionId")
+
+  <input type="submit" value="Add new plant" class="btn btn-default" />
+}
+<p>@Html.ActionLink("Show all plants", "Index")</p>

@@ -1,0 +1,30 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Inventory.Models.Collection
+@using Inventory.Models
+
+<h2>Collection Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)<h3>
+
+@if (@Model.Plants.Count == 0)
+{
+  <h3>No plants have been added to this collection yet</h3>
+} 
+else
+{
+  <h3>Plants:</h3>
+  <ul>
+    @foreach (Plant plant in Model.Plants)
+    {
+      <li>@Html.ActionLink($"{plant.Description}", "Details", "Plants", new { id = plant.PlantId })</li>
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Add new plant", "Create", "Plants")</p>
+<p>@Html.ActionLink("Edit Collection", "Edit", new { id = Model.CollectionId })</p>
+<p>@Html.ActionLink("Delete Collection", "Delete", new { id = Model.CollectionId })</p>
+<p>@Html.ActionLink("Back to list", "Index")</p>

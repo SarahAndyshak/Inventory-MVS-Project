@@ -17,7 +17,7 @@ namespace Inventory.Controllers
 
     public ActionResult Index()
     {
-      List<Collection> model = _db.Collections.Inventory();
+      List<Collection> model = _db.Collections.ToList();
       return View(model);
     }
 
@@ -44,14 +44,14 @@ namespace Inventory.Controllers
     public ActionResult Edit(Collection collection)
     {
       // _db.Entry(collection).State = EntityState.Modified;
-      _db.Collection.Update(collection);
+      _db.Collections.Update(collection);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
     public ActionResult Details(int id)
     {
-      Collection thisCollection = _db.Collection
+      Collection thisCollection = _db.Collections
                                   .Include(collection => collection.Plants)
                                   .FirstOrDefault(collection => collection.CollectionId == id);
       return View(thisCollection);
