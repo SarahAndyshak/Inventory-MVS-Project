@@ -15,8 +15,12 @@
   @Html.LabelFor(model => model.Description)
   @Html.EditorFor(model => model.Description)
 
-  @Html.LabelFor(model => model.Description)
+  @Html.LabelFor(model => model.Collection)
   @Html.DropDownList("CollectionId")
+  <br>
+
+  @Html.LabelFor(model => model.LocationFound)
+  @Html.EditorFor(model => model.LocationFound)
 
   <input type="submit" value="Save" />
 }

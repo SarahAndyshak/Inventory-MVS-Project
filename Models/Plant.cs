@@ -4,6 +4,7 @@ namespace Inventory.Models
   {
     public int PlantId { get; set; }
     public string Description { get; set; }
+    public string LocationFound { get; set; }
     public int CollectionId { get; set; }
     public Collection Collection { get; set; }
   }
